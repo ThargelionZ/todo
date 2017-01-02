@@ -1,0 +1,55 @@
+body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background-color: #c3f7ff;;
+    box-sizing: border-box;
+}
+
+noscript {
+    display: block;
+    color: red;
+}
+
+h1 {
+    text-align: center;
+}
+
+.navi {
+    float: left;
+    display: block;
+    cursor: pointer;
+    color: white;
+    font-size: 20px;
+    margin: 10px 40px 0px 40px;
+}
+
+.navi:hover  {
+    text-decoration: none;
+    color: gray;
+}
+
+.navi:visited {
+    text-decoration: underline;
+}
+
+#navigator {
+    background-color: black;
+    height: 50px;
+    width: 100%;
+}
+
+#todoInput {
+    border-radius: 5px;
+    display: block;
+    border: 1px solid gray;
+    font-size: 25px;
+    width: 500px;
+    height: 50px;
+    margin: 0 auto;
+    padding-left: 7px;
+}
+
+#todoInput:focus {
+
+}
