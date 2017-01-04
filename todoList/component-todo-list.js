@@ -3,7 +3,7 @@
  */
 (function(){
     angular.module("todoApp")
-        .component("todo-list", {
+        .component("todoList", {
             templateUrl: "todoList/todo-list.html",
             controller: todoListFunction
         });
@@ -12,6 +12,22 @@
             var ctrl = this;
 
             ctrl.todoLists = myService.todoList;
+
+            ctrl.addListItem = function (key) {
+                if(key.keyCode == 13){
+                    var input = $("#todoInput").val();
+                    if(input !== ""){
+                        myService.addListItem(input);
+                    }
+                    $("#todoInput").val("");
+                }
+            };
+
+            ctrl.removeListItem = function (id) {
+                myService.removeListItem(id);
+            };
+
+
         }
 })();
 

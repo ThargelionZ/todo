@@ -9,11 +9,18 @@
     function listService() {
         var service = this;
 
-        service.todoList = [
-            {
-                "name": "To begin, type a todo in the textbox."
-            }
-        ];
+        service.todoList = [];
+        service.completedTasks = [];
+
+        service.addListItem = function(input) {
+            service.todoList.push({"name": input});
+        };
+
+        service.removeListItem = function (id) {
+            var closeID = $("#close" + (id + 1));
+            service.todoList.splice(id, 1);
+            closeID.parent().remove();
+        };
     }
 })();
 

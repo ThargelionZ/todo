@@ -1,11 +1,12 @@
 <h1 id="todoHeading">Todo List</h1>
 
-<input type="text" id="todoInput" placeholder="Enter Your List of Tasks">
-
-<div>
-    <div id="lists">
-        <div ng-repeat="list in $ctrl.todoLists">
-            <div>{{list.name}}</div>
+<div id="todoBox">
+    <input type="text" id="todoInput" ng-keyup="$ctrl.addListItem($event)" placeholder="Enter Your List of Tasks">
+    <div id="lists" ng-repeat="list in $ctrl.todoLists">
+        <div class="listItem">
+            <span data-name="{{list.name}}" id="name{{$index + 1}}">{{list.name}}</span>
+            <span id="close{{$index + 1}}" ng-click="$ctrl.removeListItem($index)" class="close glyphicon glyphicon-remove"></span>
         </div>
     </div>
+    <div ng-if="$ctrl.todoLists.length > 0" id="tabNav"></div>
 </div>

@@ -4,6 +4,7 @@ body {
     border: 0;
     background-color: #c3f7ff;
     box-sizing: border-box;
+    font-family: "Arial";
 }
 
 noscript {
@@ -43,19 +44,75 @@ h1 {
     margin-bottom: 20px;
 }
 
+#todoBox {
+    width: 500px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
+    margin: 0 auto 100px auto;
+}
+
 #todoInput {
-    border-radius: 5px;
     display: block;
-    border: 1px solid gray;
-    font-size: 25px;
+    border: 1px solid #d9d9d9;
+    font-size: 17px;
     width: 500px;
     height: 50px;
     margin: 0 auto;
-    padding-left: 7px;
+    padding-left: 20px;
+}
+
+::-webkit-input-placeholder {
+    color: #cccccc;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+    color: #cccccc;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+    color: #cccccc;
+}
+
+:-ms-input-placeholder {
+    color: #cccccc;
 }
 
 #todoInput:focus {
-
+    outline: none;
 }
 
+#lists {
+    width: 500px;
+    margin: 0 auto;
+}
 
+.listItem:first-child {
+    border-top: none;
+}
+
+.listItem {
+    background-color: white;
+    font-size: 17px;
+    width: 500px;
+    height: 50px;
+    padding-top: 13px;
+    padding-left: 20px;
+    border: 1px solid #d9d9d9;
+}
+
+#tabNav {
+    background-color: white;
+    border: 1px solid #d9d9d9;
+    border-top: none;
+    width: 500px;
+    height: 25px;
+}
+
+.close {
+    color: red;
+    float: right;
+    margin-right: 10px;
+}
+
+.close:hover {
+    color: red;
+}

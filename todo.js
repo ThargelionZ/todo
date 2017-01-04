@@ -12,19 +12,13 @@
             $stateProvider
                 .state('todoList', {
                     url: "/todoList",
-                    templateUrl: "todoList/todo-list.html"
+                    template: "<todo-list></todo-list>"
                 })
                 .state('about', {
                     url: "/about",
-                    templateUrl: "todoList/about.html"
+                    template: "<about></about>"
                 });
         });
 })();
 
-$("#aboutHeading").on("click", function () {
-    $("body").css("background-color", "tan");
-});
 
-$("#todoHeading").on("click", function () {
-    $("body").css("background-color", "#c3f7ff");
-});
