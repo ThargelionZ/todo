@@ -2,7 +2,7 @@ body {
     margin: 0;
     padding: 0;
     border: 0;
-    background-color: #c3f7ff;;
+    background-color: #c3f7ff;
     box-sizing: border-box;
 }
 
@@ -39,6 +39,10 @@ h1 {
     width: 100%;
 }
 
+#todoHeading {
+    margin-bottom: 20px;
+}
+
 #todoInput {
     border-radius: 5px;
     display: block;
@@ -53,3 +57,5 @@ h1 {
 #todoInput:focus {
 
 }
+
+

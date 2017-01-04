@@ -1,3 +1,11 @@
 <h1 id="todoHeading">Todo List</h1>
 
-<input type="text" id="todoInput" placeholder="Enter your list of tasks">
+<input type="text" id="todoInput" placeholder="Enter Your List of Tasks">
+
+<div>
+    <div id="lists">
+        <div ng-repeat="list in $ctrl.todoLists">
+            <div>{{list.name}}</div>
+        </div>
+    </div>
+</div>
