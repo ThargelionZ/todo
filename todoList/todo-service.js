@@ -31,7 +31,7 @@
         service.completedTasks = [];
 
         service.addListItem = function(input) {
-            service.todoList.push({"name": input});
+            service.todoList.push({"name": input, "completed": false});
         };
 
         service.removeListItem = function (id) {
@@ -46,6 +46,18 @@
 
         service.changeName = function (index, newName) {
             service.todoList[index].name = newName;
+        };
+
+        service.markComplete = function (index, bool) {
+            if(!bool){
+                service.todoList[index].completed = true;
+            }
+        };
+
+        service.unmarkComplete = function (index, bool) {
+            if(bool){
+                service.todoList[index].completed = false;
+            }
         }
     }
 })();

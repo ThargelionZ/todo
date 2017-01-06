@@ -37,11 +37,9 @@
             ctrl.changeName = function(index) {
                 var data = myService.todoList[index].name;
                 $("#name" + (index + 1)).remove();
-                $("#listItem" + (index + 1)).prepend("<input id='editName' value= '" + data + "'>");
+                $("#listItem" + (index + 1)).prepend("<input id='editName' value= '" + data + "' maxlength='50'>");
                 $("#editName").focus();
                 $("#editName").select();
-
-
 
                 $("#editName").on("blur", function () {
 
@@ -64,6 +62,23 @@
                     $("#editName").remove();
                 });
             };
+
+            ctrl.completeBool = myService.todoLis;
+
+            ctrl.complete = function (index) {
+                var completeBool = myService.todoList[index].completed;
+                if(completeBool == false){
+                    console.log(myService.todoList);
+                    $("#name" + (index + 1)).css("text-decoration", "line-through");
+                    $("#name" + (index + 1)).css("color", "#d9d9d9");
+                    myService.markComplete(index, completeBool);
+                } else {
+                    console.log(myService.todoList);
+                    $("#name" + (index + 1)).css("text-decoration", "none");
+                    $("#name" + (index + 1)).css("color", "black");
+                    myService.unmarkComplete(index, completeBool);
+                }
+            }
         }
 })();
 
