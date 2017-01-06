@@ -1,12 +1,32 @@
-<h1 id="todoHeading">Todo List</h1>
 
-<div id="todoBox">
-    <input type="text" id="todoInput" ng-keyup="$ctrl.addListItem($event)" placeholder="Enter Your List of Tasks">
-    <div id="lists" ng-repeat="list in $ctrl.todoLists">
-        <div class="listItem">
-            <span data-name="{{list.name}}" id="name{{$index + 1}}">{{list.name}}</span>
-            <span id="close{{$index + 1}}" ng-click="$ctrl.removeListItem($index)" class="close glyphicon glyphicon-remove"></span>
+<div id="container">
+    <div id="createList">Create a List</div>
+
+    <div id="instructions">
+        <p><span class="glyphicon glyphicon-pencil"></span> Allows you to edit a list item. Click off the textbox to save it.</p>
+        <p><span class="glyphicon glyphicon-remove"></span> Allows you to remove a list item.</p>
+    </div>
+
+    <h1 id="todoHeading">Todo List</h1>
+
+    <div id="todoBox">
+        <input type="text" id="todoInput" ng-keyup="$ctrl.addListItem($event)" placeholder="Enter Your List of Tasks">
+        <div id="lists" ng-repeat="list in $ctrl.todoLists">
+            <div data-editable id="listItem{{$index + 1}}" class="listItem">
+                <!--<span id="completed{{$index + 1}}" class="completed glyphicon glyphicon-ok"></span>-->
+                <span class="name" id="name{{$index + 1}}">{{list.name}}</span>
+
+                <span id="close{{$index + 1}}" ng-click="$ctrl.removeListItem($index)" class="close glyphicon glyphicon-remove"></span>
+                <span id="edit{{$index + 1}}"  ng-click="$ctrl.changeName($index)" class="edit glyphicon glyphicon-pencil"></span>
+            </div>
+        </div>
+        <!--<div id="todoAmount">-->
+            <!--<span id="taskAmount">You have {{$ctrl.todoLists.length}} thing(s) to do.</span>-->
+        <!--</div>-->
+        <div ng-if="$ctrl.todoLists.length > 0" id="tabNav">
+            <span id="clearAll" ng-click="$ctrl.clearAll()">Clear All</span>
+            <span id="completedItems">Completed</span>
+            <span id="activeItems">Active</span>
         </div>
     </div>
-    <div ng-if="$ctrl.todoLists.length > 0" id="tabNav"></div>
 </div>

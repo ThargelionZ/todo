@@ -40,6 +40,17 @@ h1 {
     width: 100%;
 }
 
+#createList {
+    background-color: #6699ff;
+    border-radius: 20px;
+    height: 50px;
+    width: 200px;
+}
+
+#instructions {
+    text-align: center;
+}
+
 #todoHeading {
     margin-bottom: 20px;
 }
@@ -58,6 +69,23 @@ h1 {
     height: 50px;
     margin: 0 auto;
     padding-left: 20px;
+}
+
+#editName {
+    display: inline;
+    border: none;
+    border: 1px solid black;
+    font-size: 17px;
+    width: 431px;
+    height: 50px;
+    padding-left: 20px;
+    margin-left: -20px;
+    margin-top: -13px;
+}
+
+#editName:focus {
+    outline: none;
+    border: 1px solid black;
 }
 
 ::-webkit-input-placeholder {
@@ -104,7 +132,43 @@ h1 {
     border: 1px solid #d9d9d9;
     border-top: none;
     width: 500px;
-    height: 25px;
+    height: 40px;
+}
+
+#clearAll {
+    display: block;
+    float: left;
+    margin-left: 20px;
+    margin-top: 10px;
+    width: 54px;
+}
+
+#clearAll:hover, #completedItems:hover, #activeItems:hover {
+    cursor: pointer;
+    color: #6699ff;
+    text-decoration: underline;
+}
+
+#completedItems {
+    display: block;
+    text-align: center;
+    float: left;
+    margin-top: 10px;
+    margin-left: 139px;
+}
+
+#activeItems {
+    display: block;
+    float: right;
+    margin-top: 10px;
+    margin-right: 22px;
+}
+
+#todoAmount {
+    background-color: white;
+    text-align: center;
+    border: 1px solid #d9d9d9;
+    border-top: none;
 }
 
 .close {
@@ -115,4 +179,22 @@ h1 {
 
 .close:hover {
     color: red;
+}
+
+.edit {
+    float: right;
+    color: #6699ff;
+    margin-right: 10px;
+    margin-top: 3px;
+}
+
+.edit:hover {
+    color: #3377ff;
+    cursor: pointer;
+}
+
+.completed {
+    color: lawngreen;
+    float: left;
+    margin-right: 10px;
 }

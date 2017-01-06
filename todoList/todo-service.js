@@ -9,6 +9,24 @@
     function listService() {
         var service = this;
 
+        service.listOfLists = [
+            {"listName": "myList",
+                "listItems": []
+            }
+        ];
+
+        service.addList = function () {
+            service.listOfLists
+        };
+
+        service.removeList = function () {
+
+        };
+
+        service.clearAllLists = function () {
+
+        };
+
         service.todoList = [];
         service.completedTasks = [];
 
@@ -21,6 +39,14 @@
             service.todoList.splice(id, 1);
             closeID.parent().remove();
         };
+
+        service.clearAll = function () {
+            service.todoList = [];
+        };
+
+        service.changeName = function (index, newName) {
+            service.todoList[index].name = newName;
+        }
     }
 })();
 
