@@ -37,13 +37,20 @@
             ctrl.changeName = function(index) {
                 var data = myService.todoList[index].name;
                 $("#name" + (index + 1)).remove();
-                $("#listItem" + (index + 1)).prepend("<input id='editName' value= " + data + ">");
+                $("#listItem" + (index + 1)).prepend("<input id='editName' value= '" + data + "'>");
                 $("#editName").focus();
+                $("#editName").select();
+
+
+
                 $("#editName").on("blur", function () {
 
                     //TODO Make sure to catch the bug with deleting a list item while the edit view is open
 
                     var inputValue = $("#editName").val();
+
+                    console.log(inputValue);
+                    console.log($("#editName").val());
 
                     if(inputValue !== ""){
                         $("#listItem" + (index + 1)).prepend("<span class='name' id='name" + (index + 1) + "'>" + inputValue + "</span>");
