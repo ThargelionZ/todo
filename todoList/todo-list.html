@@ -1,37 +1,60 @@
 
+<h1 id="heading">Todo's</h1>
+
+<div id="containerLists">
+    <h3 id="listsHeader">Lists</h3>
+    <div id="listOfLists">
+        <input type="text" id="listInput" ng-keyup="$ctrl.addList($event)" placeholder="Enter the Name of Your Lists">
+        <div id="list" ng-repeat="list in $ctrl.listOfLists">
+            <div id="listOfListsItem{{$index + 1}}" ng-class="{'selected': $index === $ctrl.selected}" class="listOfListsItem" ng-click="$ctrl.selected = $index">
+                <span class="listName" id="listName{{$index + 1}}">{{list.listName}}</span>
+                <span title="Close list item" id="closeList{{$index + 1}}" ng-click="$ctrl.removeList($index)" class="close glyphicon glyphicon-remove"></span>
+                <span title="Edit list item" id="editListName{{$index + 1}}"  ng-click="$ctrl.editList($index)" class="edit glyphicon glyphicon-pencil"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <div id="container">
-    <div id="createList">Create a List</div>
 
     <div id="instructions">
         <h3 id="instructionsTitle">Instructions</h3>
+        <p><strong>Start by making a list. Then select the list and then you can add list items to it.</strong></p>
         <p><span class="glyphicon glyphicon-pencil"></span> Allows you to edit a list item. Click off the textbox to save it.</p>
         <p><span class="glyphicon glyphicon-remove"></span> Allows you to remove a list item.</p>
-        <p>To mark a task as complete, click on the name of the list item.</p>
+        <p><span class="glyphicon glyphicon-ok"></span> Allows you to mark a task as complete. Click again to mark it as incomplete.</p>
     </div>
 
-    <h1 id="todoHeading">Todo List</h1>
+    <div class="todoLists" ng-repeat="list in $ctrl.listOfLists">
+        <div ng-if="$ctrl.isSelected($index)">
+            <h1 id="todoHeading">{{$ctrl.listOfLists[$index].listName}}</h1>
 
-    <div id="todoBox">
-        <input type="text" id="todoInput" ng-keyup="$ctrl.addListItem($event)" placeholder="Enter Your List of Tasks" maxlength="50">
-        <div id="lists" ng-repeat="list in $ctrl.todoLists">
-            <div id="listItem{{$index + 1}}" class="listItem">
+            <div id="todoBox">
+                <input type="text" id="todoInput" ng-keyup="$ctrl.addListItem($event, $index)" placeholder="Enter Your List of Tasks" maxlength="47">
+                <div id="lists" ng-repeat="list in $ctrl.listOfLists[$index].listItems">
+                    <div ng-class="{'completed-item': $ctrl.listOfLists[$parent.$index].listItems[$index].completed}" id="listItem{{$index + 1}}" class="listItem">
 
-                <span id="completed{{$index + 1}}" ng-class="{'no-display': !($ctrl.todoLists[$index].completed)}" class="completed glyphicon glyphicon-ok"></span>
+                        <span id="completed{{$index + 1}}" ng-class="{'no-display': !($ctrl.listOfLists[$parent.$index].listItems[$index].completed)}" class="completed glyphicon glyphicon-ok"></span>
 
-                <span ng-click="$ctrl.complete($index)" class="name" id="name{{$index + 1}}">{{list.name}}</span>
+                        <span class="name" id="name{{$index + 1}}">{{list.name}}</span>
 
-                <span title="Close list item" id="close{{$index + 1}}" ng-click="$ctrl.removeListItem($index)" class="close glyphicon glyphicon-remove"></span>
-                <span title="Edit list item" id="edit{{$index + 1}}"  ng-click="$ctrl.changeName($index)" class="edit glyphicon glyphicon-pencil"></span>
+                        <span title="Close list item" id="close{{$index + 1}}" ng-click="$ctrl.removeListItem($index, $parent.$index)" class="close glyphicon glyphicon-remove"></span>
+                        <span title="Mark as complete or incomplete" ng-class="{'check-incomplete': $ctrl.listOfLists[$parent.$index].listItems[$index].completed, 'check-incomplete:hover': $ctrl.listOfLists[$parent.$index].listItems[$index].completed}" id="check{{$index + 1}}" ng-click="$ctrl.complete($index, $parent.$index)" class="check glyphicon glyphicon-ok"></span>
+                        <span title="Edit list item" id="edit{{$index + 1}}"  ng-click="$ctrl.changeName($index, $parent.$index)" class="edit glyphicon glyphicon-pencil"></span>
 
+
+                    </div>
+                </div>
+                <!--<div id="todoAmount">-->
+                <!--<span id="taskAmount">You have {{$ctrl.todoLists.length}} thing(s) to do.</span>-->
+                <!--</div>-->
+                <div ng-if="$ctrl.listOfLists[$index].listItems.length > 0" id="tabNav">
+                    <span id="clearCompletedItems" ng-click="$ctrl.clearCompleted($index)">Clear Completed</span>
+                    <span id="clearAll" ng-click="$ctrl.clearAll($index)">Clear All</span>
+                </div>
             </div>
-        </div>
-        <!--<div id="todoAmount">-->
-            <!--<span id="taskAmount">You have {{$ctrl.todoLists.length}} thing(s) to do.</span>-->
-        <!--</div>-->
-        <div ng-if="$ctrl.todoLists.length > 0" id="tabNav">
-            <span id="clearAll" ng-click="$ctrl.clearAll()">Clear All</span>
-            <span id="completedItems">Completed</span>
-            <span id="activeItems">Active</span>
         </div>
     </div>
 </div>

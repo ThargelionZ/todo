@@ -1,6 +1,7 @@
 /**
  * Created by mylesparker on 1/2/17.
  */
+
 (function(){
     angular.module("todoApp")
         .component("todoList", {
@@ -11,74 +12,119 @@
         function todoListFunction(myService) {
             var ctrl = this;
 
-            ctrl.todoLists = myService.todoList;
+            ctrl.listOfLists = myService.listOfLists;
 
-            ctrl.addListItem = function (key) {
-                ctrl.todoLists = myService.todoList;
+            ctrl.selected = 0;
+
+            ctrl.isSelected = function (index) {
+                if(index == ctrl.selected){
+                    return true;
+                } else {
+                    return false;
+                }
+            };
+
+            ctrl.addList = function (key) {
+                ctrl.listOfLists = myService.listOfLists;
+
+                if(key.keyCode == 13){
+                    var input = $("#listInput").val();
+                    if(input !== ""){
+                        myService.addList(input);
+                    }
+                    $("#listInput").val("");
+                }
+            };
+
+            ctrl.removeList = function (index) {
+                if(ctrl.listOfLists.length === (index + 1)){
+                    ctrl.selected--;
+                }
+                myService.removeList(index);
+            };
+
+            ctrl.clearAllLists = function () {
+
+            };
+
+            ctrl.editList = function (index) {
+                var data = myService.listOfLists[index].listName;
+                $("#listName" + (index + 1)).remove();
+                $("#listOfListsItem" + (index + 1)).prepend("<input id='editListName' value= '" + data + "' maxlength='47'>");
+                $("#editListName").focus();
+                $("#editListName").select();
+
+                $("#editListName").on("blur", function () {
+
+                    var inputValue = $("#editListName").val();
+
+                    if(inputValue !== ""){
+                        $("#listOfListsItem" + (index + 1)).prepend("<span class='listName' id='listName" + (index + 1) + "'>" + inputValue + "</span>");
+                        myService.editList(index, inputValue);
+                    } else {
+                        $("#listOfListsItem" + (index + 1)).prepend("<span class='listName' id='listName" + (index + 1) + "'>" + data + "</span>");
+                    }
+
+                    $("#editListName").remove();
+                });
+            };
+
+            ctrl.addListItem = function (key, index) {
 
                 if(key.keyCode == 13){
                     var input = $("#todoInput").val();
                     if(input !== ""){
-                        myService.addListItem(input);
+                        myService.addListItem(input, index);
                     }
                     $("#todoInput").val("");
                 }
             };
 
-            ctrl.removeListItem = function (id) {
-                myService.removeListItem(id);
+            ctrl.removeListItem = function (index, parentIndex) {
+                myService.removeListItem(index, parentIndex);
             };
 
-            ctrl.clearAll = function () {
-                ctrl.todoLists = [];
-                myService.clearAll();
+            ctrl.clearAll = function (index) {
+                ctrl.listOfLists[index].listItems = [];
+                myService.clearAll(index);
             };
 
-            ctrl.changeName = function(index) {
-                var data = myService.todoList[index].name;
-                $("#name" + (index + 1)).remove();
-                $("#listItem" + (index + 1)).prepend("<input id='editName' value= '" + data + "' maxlength='50'>");
-                $("#editName").focus();
-                $("#editName").select();
+            ctrl.changeName = function(index, parentIndex) {
+                if(myService.listOfLists[parentIndex].listItems[index].completed == false){
+                    var data = myService.listOfLists[parentIndex].listItems[index].name;
+                    $("#name" + (index + 1)).remove();
+                    $("#listItem" + (index + 1)).prepend("<input id='editName' value= '" + data + "' maxlength='47'>");
+                    $("#editName").focus();
+                    $("#editName").select();
 
-                $("#editName").on("blur", function () {
+                    $("#editName").on("blur", function () {
 
-                    //TODO Make sure to catch the bug with deleting a list item while the edit view is open
+                        var inputValue = $("#editName").val();
 
-                    var inputValue = $("#editName").val();
+                        if(inputValue !== ""){
+                            $("#listItem" + (index + 1)).prepend("<span class='name' id='name" + (index + 1) + "'>" + inputValue + "</span>");
+                            myService.changeName(index, inputValue, parentIndex);
+                        } else {
+                            $("#listItem" + (index + 1)).prepend("<span class='name' id='name" + (index + 1) + "'>" + data + "</span>");
+                        }
 
-                    console.log(inputValue);
-                    console.log($("#editName").val());
-
-                    if(inputValue !== ""){
-                        $("#listItem" + (index + 1)).prepend("<span class='name' id='name" + (index + 1) + "'>" + inputValue + "</span>");
-                        myService.changeName(index, inputValue);
-                    } else {
-                        $("#listItem" + (index + 1)).prepend("<span class='name' id='name" + (index + 1) + "'>" + data + "</span>");
-                    }
-
-                    console.log(myService.todoList);
-
-                    $("#editName").remove();
-                });
-            };
-
-            ctrl.completeBool = myService.todoLis;
-
-            ctrl.complete = function (index) {
-                var completeBool = myService.todoList[index].completed;
-                if(completeBool == false){
-                    console.log(myService.todoList);
-                    $("#name" + (index + 1)).css("text-decoration", "line-through");
-                    $("#name" + (index + 1)).css("color", "#d9d9d9");
-                    myService.markComplete(index, completeBool);
-                } else {
-                    console.log(myService.todoList);
-                    $("#name" + (index + 1)).css("text-decoration", "none");
-                    $("#name" + (index + 1)).css("color", "black");
-                    myService.unmarkComplete(index, completeBool);
+                        $("#editName").remove();
+                    });
                 }
-            }
+            };
+
+            ctrl.complete = function (index, parentIndex) {
+                var completeBool = myService.listOfLists[parentIndex].listItems[index].completed;
+                if(completeBool == false){
+                    myService.markComplete(index, completeBool, parentIndex);
+                } else {
+                    myService.unmarkComplete(index, completeBool, parentIndex);
+                }
+            };
+
+            ctrl.clearCompleted = function (index) {
+                myService.clearCompleted(index);
+            };
         }
 })();
 
