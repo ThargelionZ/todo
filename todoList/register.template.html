@@ -5,6 +5,7 @@
         <input class="authItem" type="email" ng-model="vm.user.email">
         <label>Password</label>
         <input class="authItem" type="password" ng-model="vm.user.password">
-        <input type="submit" value="Register" ng-click="vm.registerUser()">
+        <input class="authButton" type="submit" value="Register" ng-click="vm.registerUser()">
+        <p class="authInfo">Already have an account? Login <a ui-sref="login">here</a>.</p>
     </div>
 </div>

@@ -6,7 +6,7 @@
     angular.module("todoApp")
         .service("myService", listService);
 
-    function listService() {
+    function listService($mdToast) {
         var service = this;
 
         service.listOfLists = [];

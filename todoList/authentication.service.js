@@ -4,25 +4,32 @@
 
 (function (){
     angular.module("todoApp")
-        .service("authService", function ($firebaseAuth) {
+        .service("authService", function ($firebaseAuth, $mdToast) {
             var self = this;
 
             self.registerUser = function (user) {
+                if(user.email == null || user.password == null){
+                    $mdToast.showSimple("Must enter all information correctly.")
+                }
                 $firebaseAuth().$createUserWithEmailAndPassword(user.email, user.password)
                     .then(function (firebaseUser) {
-                        console.log("User has been created: " + firebaseUser.uid);
+                        $mdToast.showSimple("User has been created: " + user.email);
+                        $(".authItem").val("");
                     }).catch(function (error) {
-                    console.log(error);
-                })
+                    $mdToast.showSimple(error.message);
+                });
             };
 
             self.loginUser = function (email, password) {
+                if(email == null || password == null){
+                    $mdToast.showSimple("Must enter all information correctly.")
+                }
                 $firebaseAuth().$signInWithEmailAndPassword(email, password)
                     .then(function (firebaseUser) {
-                        console.log("User has been logged in!" + firebaseUser);
+                        $mdToast.showSimple("User has been logged in!");
                         $(".authItem").val("");
                     }).catch(function (error) {
-                    console.log("User has not been registered. " + error);
+                    $mdToast.showSimple(error.message);
                 })
             };
 
@@ -46,9 +53,10 @@
 
             self.signOut = function () {
                 firebase.auth().signOut().then(function () {
-                    console.log("Sign out successful");
+                    $mdToast("Sign out successful");
+                    $(".authItem").val("");
                 }, function(error) {
-                    console.log(error);
+                    $mdToast(error);
                 });
             };
 

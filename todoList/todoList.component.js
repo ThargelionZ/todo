@@ -9,7 +9,7 @@
             controller: todoListFunction
         });
 
-        function todoListFunction(myService) {
+        function todoListFunction(myService, $mdToast) {
             var ctrl = this;
 
             ctrl.listOfLists = myService.listOfLists;
@@ -31,6 +31,8 @@
                     var input = $("#listInput").val();
                     if(input !== ""){
                         myService.addList(input);
+                    } else {
+                        $mdToast.showSimple("You can not add a list without a name!")
                     }
                     $("#listInput").val("");
                 }
@@ -40,6 +42,7 @@
                 if(ctrl.listOfLists.length === (index + 1)){
                     ctrl.selected--;
                 }
+                $mdToast.showSimple("Removed list \"" + myService.listOfLists[index].listName + "\".");
                 myService.removeList(index);
             };
 
@@ -66,6 +69,7 @@
                     }
 
                     $("#editListName").remove();
+                    $mdToast.showSimple("List \"" + data + "\" was changed to \"" + inputValue + "\".");
                 });
             };
 
@@ -75,18 +79,22 @@
                     var input = $("#todoInput").val();
                     if(input !== ""){
                         myService.addListItem(input, index);
+                    } else {
+                        $mdToast.showSimple("You can not add a list item without a name!")
                     }
                     $("#todoInput").val("");
                 }
             };
 
             ctrl.removeListItem = function (index, parentIndex) {
+                $mdToast.showSimple("Removed list item \"" + myService.listOfLists[parentIndex].listItems[index].name + "\" in list \"" + myService.listOfLists[parentIndex].listName + "\".");
                 myService.removeListItem(index, parentIndex);
             };
 
             ctrl.clearAll = function (index) {
                 ctrl.listOfLists[index].listItems = [];
                 myService.clearAll(index);
+                $mdToast.showSimple("Cleared all list items.");
             };
 
             ctrl.changeName = function(index, parentIndex) {
@@ -109,6 +117,7 @@
                         }
 
                         $("#editName").remove();
+                        $mdToast.showSimple("Todo item \"" + data + "\" was changed to \"" + inputValue + "\".");
                     });
                 }
             };
@@ -124,6 +133,7 @@
 
             ctrl.clearCompleted = function (index) {
                 myService.clearCompleted(index);
+                $mdToast.showSimple("Cleared all completed tasks.");
             };
         }
 })();

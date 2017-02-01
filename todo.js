@@ -2,7 +2,7 @@
  * Created by mylesparker on 12/21/16.
  */
 (function() {
-    angular.module("todoApp", ["ui.router", "firebase"])
+    angular.module("todoApp", ["ui.router", "firebase", "ngMaterial"])
         .config(function($stateProvider, $urlRouterProvider) {
             //
             // For any unmatched url, redirect to /state1
