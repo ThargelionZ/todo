@@ -5,7 +5,7 @@
 (function(){
     angular.module("todoApp")
         .component("todoList", {
-            templateUrl: "todoList/todo-list.html",
+            templateUrl: "todoList/todoList.template.html",
             controller: todoListFunction
         });
 

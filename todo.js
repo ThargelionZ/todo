@@ -2,7 +2,7 @@
  * Created by mylesparker on 12/21/16.
  */
 (function() {
-    angular.module("todoApp", ["ui.router"])
+    angular.module("todoApp", ["ui.router", "firebase"])
         .config(function($stateProvider, $urlRouterProvider) {
             //
             // For any unmatched url, redirect to /state1
@@ -10,13 +10,21 @@
             //
             // Now set up the states
             $stateProvider
-                .state('todoList', {
+                .state("todoList", {
                     url: "/todoList",
                     template: "<todo-list></todo-list>"
                 })
-                .state('about', {
+                .state("about", {
                     url: "/about",
                     template: "<about></about>"
+                })
+                .state("register", {
+                    url: "/register",
+                    template: "<register></register>"
+                })
+                .state("login", {
+                    url: "/login",
+                    template: "<login></login>"
                 });
         });
 })();

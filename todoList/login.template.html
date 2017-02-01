@@ -1,0 +1,13 @@
+<div id="login-container">
+    <h1>Login</h1>
+    <div class="authInput">
+        <label>Email</label>
+        <input class="authItem" type="email" ng-model="vm.email">
+        <label>Password</label>
+        <input class="authItem" type="password" ng-model="vm.password">
+        <input type="submit" value="Login" ng-click="vm.login()">
+        <button ng-if="!(vm.user)" class="user-options" id="google-login" ng-click="vm.googleLogin()">Click here to sign in with Google</button>
+        <button ng-if="vm.user !== null" class="user-options" id="sign-out" ng-click="vm.signOut()">Sign Out</button>
+        <input type="button" id="current-user" ng-click="vm.getCurrentUser()" value="Get Current User">
+    </div>
+</div>

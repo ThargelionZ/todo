@@ -11,19 +11,49 @@
 
     <div id="navigator">
         <div class="navi" ui-sref="todoList" id="todoHeading">Todo List</div>
+        <div class="navi" ui-sref="login" id="loginHeading">Login</div>
+        <div class="navi" ui-sref="register" id="registerHeading">Register</div>
         <div class="navi" ui-sref="about" id="aboutHeading">About</div>
     </div>
 
     <div ui-view></div>
 
+    <!--add angular and jquery to project-->
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.9/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.2/angular-ui-router.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-animate.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-aria.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-messages.min.js"></script>
+
+    <!--angular material-->
+    <!--<script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.js"></script>-->
+
+    <!--firebase and angular fire-->
+    <script src="https://www.gstatic.com/firebasejs/3.6.7/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyDM8QjhrQXHmInqcFLWmHYnqcRiWdfxe44",
+            authDomain: "todo-71313.firebaseapp.com",
+            databaseURL: "https://todo-71313.firebaseio.com",
+            storageBucket: "todo-71313.appspot.com",
+            messagingSenderId: "247759237752"
+        };
+        firebase.initializeApp(config);
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angularFire/2.2.0/angularfire.min.js"></script>
+
+
+
 
     <script src="todo.js"></script>
-    <script src="todoList/todo-service.js"></script>
-    <script src="todoList/component-todo-list.js"></script>
+    <script src="todoList/todo.service.js"></script>
+    <script src="todoList/authentication.service.js"></script>
+    <script src="todoList/todoList.component.js"></script>
     <script src="todoList/component-about.js"></script>
+    <script src="todoList/register.component.js"></script>
+    <script src="todoList/login.component.js"></script>
 
     <noscript>JavaScript Failed to Load. Check and make sure that you are in an updated browser and have JavaScript turned on in your browser settings.</noscript>
 </body>
