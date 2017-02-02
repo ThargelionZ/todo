@@ -48,6 +48,10 @@ h1 {
     font-size: 66px;
 }
 
+#signOutHeading:focus {
+    outline: none;
+}
+
 /*------------------------------------------------
     List of Lists
   ----------------------------------------------*/
@@ -94,6 +98,10 @@ h1 {
     padding-left: 20px;
     border: 1px solid #d9d9d9;
     border-top: none;
+}
+
+.listOfListsItem:focus {
+    outline: none;
 }
 
 .selected {
@@ -225,10 +233,14 @@ h1 {
     width: 54px;
 }
 
-#clearAll:hover, #clearCompletedItems:hover, #activeItems:hover {
+#clearAll:hover, #clearCompletedItems:hover {
     cursor: pointer;
     color: #6699ff;
     text-decoration: underline;
+}
+
+#clearAll:focus, #clearCompletedItems:focus {
+    outline: none;
 }
 
 #clearCompletedItems {
@@ -236,13 +248,6 @@ h1 {
     float: left;
     margin-top: 10px;
     margin-left: 20px;
-}
-
-#activeItems {
-    display: block;
-    float: right;
-    margin-top: 10px;
-    margin-right: 22px;
 }
 
 #todoAmount {
@@ -262,6 +267,10 @@ h1 {
     color: red;
 }
 
+.close:focus {
+    outline: none;
+}
+
 .edit {
     float: right;
     color: #6699ff;
@@ -274,6 +283,10 @@ h1 {
     cursor: pointer;
 }
 
+.edit:focus {
+    outline: none;
+}
+
 .check {
     float: right;
     color: #ccff99;
@@ -284,6 +297,10 @@ h1 {
 .check:hover {
     color: lawngreen;
     cursor: pointer;
+}
+
+.check:focus {
+    outline: none;
 }
 
 .check-incomplete {
@@ -335,10 +352,6 @@ h1 {
 /*------------------------------------------------
     Login and Required Components
   ----------------------------------------------*/
-
-#login-container {
-
-}
 
 .authInput {
     width: 400px;
@@ -396,4 +409,12 @@ h1 {
     background-image: -ms-linear-gradient(top,#4d90fe,#357ae8);
     background-image: -o-linear-gradient(top,#4d90fe,#357ae8);
     background-image: linear-gradient(top,#4d90fe,#357ae8);
+}
+
+.authButton:focus {
+    outline: none;
+}
+
+#linkTodo {
+    margin-bottom: 20px;
 }

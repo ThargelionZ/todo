@@ -13,6 +13,7 @@
 
         service.addList = function (input) {
             service.listOfLists.push({"listName": input, "listItems": []});
+            $mdToast.showSimple("The list \"" + input + "\" was added.");
         };
 
         service.removeList = function (index) {
@@ -33,6 +34,7 @@
 
         service.addListItem = function(input, index) {
             service.listOfLists[index].listItems.push({"name": input, "completed": false});
+            $mdToast.showSimple("The list item \"" + input + "\" was added to list \"" + service.listOfLists[index].listName + "\".")
         };
 
         service.removeListItem = function (index, parentIndex) {
@@ -52,12 +54,14 @@
         service.markComplete = function (index, bool, parentIndex) {
             if(!bool){
                 service.listOfLists[parentIndex].listItems[index].completed = true;
+                $mdToast.showSimple("\"" + service.listOfLists[parentIndex].listItems[index].name + "\" was marked as complete.");
             }
         };
 
         service.unmarkComplete = function (index, bool, parentIndex) {
             if(bool){
                 service.listOfLists[parentIndex].listItems[index].completed = false;
+                $mdToast.showSimple("\"" + service.listOfLists[parentIndex].listItems[index].name + "\" was marked as incomplete.");
             }
         };
 

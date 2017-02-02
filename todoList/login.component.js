@@ -31,6 +31,8 @@
         vm.login = function () {
             authService.loginUser(vm.email, vm.password);
             vm.user = firebase.auth().currentUser;
+            vm.email = null;
+            vm.email = null;
         };
 
         vm.googleLogin = function () {

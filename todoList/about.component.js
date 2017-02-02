@@ -4,7 +4,7 @@
 (function(){
     angular.module("todoApp")
         .component("about", {
-            templateUrl: "todoList/about.html",
+            templateUrl: "todoList/about.template.html",
             controller: aboutFunction
         });
 

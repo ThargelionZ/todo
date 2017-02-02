@@ -9,6 +9,7 @@
             <input class="authButton" type="submit" value="Login" ng-click="vm.login()">
             <!--<button ng-if="!(vm.user)" class="user-options" id="google-login" ng-click="vm.googleLogin()">Click here to sign in with Google</button>-->
         </div>
+        <button ng-if="vm.user !== null" class="authButton" id="linkTodo" ui-sref="todoList">Go to Todo List</button>
         <button ng-if="vm.user !== null" class="authButton" id="sign-out" ng-click="vm.signOut()">Sign Out</button>
         <!--<input type="button" id="current-user" ng-click="vm.getCurrentUser()" value="Get Current User">-->
         <p class="authInfo">Don't have an account? Register <a ui-sref="register">here</a>.</p>

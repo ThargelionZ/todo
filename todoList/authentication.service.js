@@ -7,13 +7,29 @@
         .service("authService", function ($firebaseAuth, $mdToast) {
             var self = this;
 
+            self.$onInit = function () {
+                var userId = firebase.auth().currentUser.uid;
+                return firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
+                    var username = snapshot.val().username;
+                    console.log(username);
+                });
+            };
+
+            self.writeUserData = function (username, uid) {
+              firebase.database().ref("users/" + uid).set({
+                  username: username,
+                  uid: uid
+              });
+            };
+
             self.registerUser = function (user) {
                 if(user.email == null || user.password == null){
-                    $mdToast.showSimple("Must enter all information correctly.")
+                    $mdToast.showSimple("Must enter all information correctly.");
                 }
                 $firebaseAuth().$createUserWithEmailAndPassword(user.email, user.password)
                     .then(function (firebaseUser) {
                         $mdToast.showSimple("User has been created: " + user.email);
+                        self.writeUserData(firebaseUser.email, firebaseUser.uid);
                         $(".authItem").val("");
                     }).catch(function (error) {
                     $mdToast.showSimple(error.message);
@@ -26,8 +42,9 @@
                 }
                 $firebaseAuth().$signInWithEmailAndPassword(email, password)
                     .then(function (firebaseUser) {
-                        $mdToast.showSimple("User has been logged in!");
+                        $mdToast.showSimple(firebaseUser.email + " has been logged in!");
                         $(".authItem").val("");
+                        $(".authItem").html("");
                     }).catch(function (error) {
                     $mdToast.showSimple(error.message);
                 })
@@ -53,7 +70,7 @@
 
             self.signOut = function () {
                 firebase.auth().signOut().then(function () {
-                    $mdToast("Sign out successful");
+                    $mdToast.showSimple("Sign Out was successful.");
                     $(".authItem").val("");
                 }, function(error) {
                     $mdToast(error);

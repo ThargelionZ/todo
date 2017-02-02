@@ -8,13 +8,14 @@
     <meta charset="UTF-8">
     <title>Todo App</title>
 </head>
-<body ng-app="todoApp">
+<body ng-app="todoApp" ng-controller="IndexController as vm">
 
     <div id="navigator">
         <div class="navi" ui-sref="todoList" id="todoHeading">Todo List</div>
         <div class="navi" ui-sref="login" id="loginHeading">Login</div>
         <div class="navi" ui-sref="register" id="registerHeading">Register</div>
         <div class="navi" ui-sref="about" id="aboutHeading">About</div>
+        <div ng-if="vm.user" ng-click="vm.signOut()" class="navi" id="signOutHeading">Sign Out</div>
     </div>
 
     <div ui-view></div>
@@ -48,11 +49,12 @@
 
 
 
-    <script src="todo.js"></script>
+    <script src="todo.main.js"></script>
+    <script src="todo.controller.js"></script>
     <script src="todoList/todo.service.js"></script>
     <script src="todoList/authentication.service.js"></script>
     <script src="todoList/todoList.component.js"></script>
-    <script src="todoList/component-about.js"></script>
+    <script src="todoList/about.component.js"></script>
     <script src="todoList/register.component.js"></script>
     <script src="todoList/login.component.js"></script>
 
