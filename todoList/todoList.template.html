@@ -7,7 +7,7 @@
         <input type="text" id="listInput" ng-keyup="$ctrl.addList($event)" placeholder="Enter the Name of Your Lists">
         <div id="list" ng-repeat="list in $ctrl.listOfLists">
             <div id="listOfListsItem{{$index + 1}}" ng-class="{'selected': $index === $ctrl.selected}" class="listOfListsItem" ng-click="$ctrl.selected = $index">
-                <span class="listName" id="listName{{$index + 1}}">{{list.listName}}</span>
+                <span class="listName" id="listName{{$index + 1}}">{{list.listName | uppercaseFirstLetter}}</span>
                 <span title="Close list item" id="closeList{{$index + 1}}" ng-click="$ctrl.removeList($index)" class="close glyphicon glyphicon-remove"></span>
                 <span title="Edit list item" id="editListName{{$index + 1}}"  ng-click="$ctrl.editList($index)" class="edit glyphicon glyphicon-pencil"></span>
             </div>
@@ -30,7 +30,7 @@
 
     <div class="todoLists" ng-repeat="list in $ctrl.listOfLists">
         <div ng-if="$ctrl.isSelected($index)">
-            <h1 id="todoHeading">{{$ctrl.listOfLists[$index].listName}}</h1>
+            <h1 id="todoHeading">{{$ctrl.listOfLists[$index].listName | uppercaseFirstLetter}}</h1>
 
             <div id="todoBox">
                 <input type="text" id="todoInput" ng-keyup="$ctrl.addListItem($event, $index)" placeholder="Enter Your List of Tasks" maxlength="47">
@@ -39,7 +39,7 @@
 
                         <span id="completed{{$index + 1}}" ng-class="{'no-display': !($ctrl.listOfLists[$parent.$index].listItems[$index].completed)}" class="completed glyphicon glyphicon-ok"></span>
 
-                        <span class="name" id="name{{$index + 1}}">{{list.name}}</span>
+                        <span class="name" id="name{{$index + 1}}">{{list.name | uppercaseFirstLetter}}</span>
 
                         <span title="Close list item" id="close{{$index + 1}}" ng-click="$ctrl.removeListItem($index, $parent.$index)" class="close glyphicon glyphicon-remove"></span>
                         <span title="Mark as complete or incomplete" ng-class="{'check-incomplete': $ctrl.listOfLists[$parent.$index].listItems[$index].completed, 'check-incomplete:hover': $ctrl.listOfLists[$parent.$index].listItems[$index].completed}" id="check{{$index + 1}}" ng-click="$ctrl.complete($index, $parent.$index)" class="check glyphicon glyphicon-ok"></span>

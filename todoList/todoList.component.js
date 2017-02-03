@@ -9,7 +9,7 @@
             controller: todoListFunction
         });
 
-        function todoListFunction(myService, $mdToast) {
+        function todoListFunction(myService, $mdToast, $filter) {
             var ctrl = this;
 
             ctrl.listOfLists = myService.listOfLists;
@@ -30,6 +30,7 @@
                 if(key.keyCode == 13){
                     var input = $("#listInput").val();
                     if(input !== ""){
+                        $filter("uppercaseFirstLetter")(input);
                         myService.addList(input);
                     } else {
                         $mdToast.showSimple("You can not add a list without a name!")
@@ -42,7 +43,7 @@
                 if(ctrl.listOfLists.length === (index + 1)){
                     ctrl.selected--;
                 }
-                $mdToast.showSimple("Removed list \"" + myService.listOfLists[index].listName + "\".");
+                $mdToast.showSimple("Removed list \"" + $filter("uppercaseFirstLetter")(myService.listOfLists[index].listName) + "\".");
                 myService.removeList(index);
             };
 
@@ -53,7 +54,7 @@
             ctrl.editList = function (index) {
                 var data = myService.listOfLists[index].listName;
                 $("#listName" + (index + 1)).remove();
-                $("#listOfListsItem" + (index + 1)).prepend("<input id='editListName' value= '" + data + "' maxlength='47'>");
+                $("#listOfListsItem" + (index + 1)).prepend("<input id='editListName' value= '" + $filter("uppercaseFirstLetter")(data) + "' maxlength='47'>");
                 $("#editListName").focus();
                 $("#editListName").select();
 
@@ -62,14 +63,14 @@
                     var inputValue = $("#editListName").val();
 
                     if(inputValue !== ""){
-                        $("#listOfListsItem" + (index + 1)).prepend("<span class='listName' id='listName" + (index + 1) + "'>" + inputValue + "</span>");
+                        $("#listOfListsItem" + (index + 1)).prepend("<span class='listName' id='listName" + (index + 1) + "'>" + $filter("uppercaseFirstLetter")(inputValue) + "</span>");
                         myService.editList(index, inputValue);
                     } else {
-                        $("#listOfListsItem" + (index + 1)).prepend("<span class='listName' id='listName" + (index + 1) + "'>" + data + "</span>");
+                        $("#listOfListsItem" + (index + 1)).prepend("<span class='listName' id='listName" + (index + 1) + "'>" + $filter("uppercaseFirstLetter")(data) + "</span>");
                     }
 
                     $("#editListName").remove();
-                    $mdToast.showSimple("List \"" + data + "\" was changed to \"" + inputValue + "\".");
+                    $mdToast.showSimple("List \"" + $filter("uppercaseFirstLetter")(data) + "\" was changed to \"" + $filter("uppercaseFirstLetter")(inputValue) + "\".");
                 });
             };
 
@@ -87,7 +88,7 @@
             };
 
             ctrl.removeListItem = function (index, parentIndex) {
-                $mdToast.showSimple("Removed list item \"" + myService.listOfLists[parentIndex].listItems[index].name + "\" in list \"" + myService.listOfLists[parentIndex].listName + "\".");
+                $mdToast.showSimple("Removed list item \"" + $filter("uppercaseFirstLetter")(myService.listOfLists[parentIndex].listItems[index].name) + "\" in list \"" + $filter("uppercaseFirstLetter")(myService.listOfLists[parentIndex].listName) + "\".");
                 myService.removeListItem(index, parentIndex);
             };
 
@@ -101,7 +102,7 @@
                 if(myService.listOfLists[parentIndex].listItems[index].completed == false){
                     var data = myService.listOfLists[parentIndex].listItems[index].name;
                     $("#name" + (index + 1)).remove();
-                    $("#listItem" + (index + 1)).prepend("<input id='editName' value= '" + data + "' maxlength='47'>");
+                    $("#listItem" + (index + 1)).prepend("<input id='editName' value= '" + $filter("uppercaseFirstLetter")(data) + "' maxlength='47'>");
                     $("#editName").focus();
                     $("#editName").select();
 
@@ -110,14 +111,14 @@
                         var inputValue = $("#editName").val();
 
                         if(inputValue !== ""){
-                            $("#listItem" + (index + 1)).prepend("<span class='name' id='name" + (index + 1) + "'>" + inputValue + "</span>");
+                            $("#listItem" + (index + 1)).prepend("<span class='name' id='name" + (index + 1) + "'>" + $filter("uppercaseFirstLetter")(inputValue) + "</span>");
                             myService.changeName(index, inputValue, parentIndex);
                         } else {
-                            $("#listItem" + (index + 1)).prepend("<span class='name' id='name" + (index + 1) + "'>" + data + "</span>");
+                            $("#listItem" + (index + 1)).prepend("<span class='name' id='name" + (index + 1) + "'>" + $filter("uppercaseFirstLetter")(data) + "</span>");
                         }
 
                         $("#editName").remove();
-                        $mdToast.showSimple("Todo item \"" + data + "\" was changed to \"" + inputValue + "\".");
+                        $mdToast.showSimple("Todo item \"" + $filter("uppercaseFirstLetter")(data) + "\" was changed to \"" + $filter("uppercaseFirstLetter")(inputValue) + "\".");
                     });
                 }
             };

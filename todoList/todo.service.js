@@ -6,7 +6,7 @@
     angular.module("todoApp")
         .service("myService", listService);
 
-    function listService($mdToast, $localStorage) {
+    function listService($mdToast, $localStorage, $filter) {
         var service = this;
 
         if(!($localStorage.init)) {
@@ -18,7 +18,7 @@
 
         service.addList = function (input) {
             service.listOfLists.push({"listName": input, "listItems": []});
-            $mdToast.showSimple("The list \"" + input + "\" was added.");
+            $mdToast.showSimple("The list \"" + $filter("uppercaseFirstLetter")(input) + "\" was added.");
         };
 
         service.removeList = function (index) {
@@ -39,7 +39,7 @@
 
         service.addListItem = function(input, index) {
             service.listOfLists[index].listItems.push({"name": input, "completed": false});
-            $mdToast.showSimple("The list item \"" + input + "\" was added to list \"" + service.listOfLists[index].listName + "\".")
+            $mdToast.showSimple("The list item \"" + $filter("uppercaseFirstLetter")(input) + "\" was added to list \"" + $filter("uppercaseFirstLetter")(service.listOfLists[index].listName) + "\".")
         };
 
         service.removeListItem = function (index, parentIndex) {
@@ -59,14 +59,14 @@
         service.markComplete = function (index, bool, parentIndex) {
             if(!bool){
                 service.listOfLists[parentIndex].listItems[index].completed = true;
-                $mdToast.showSimple("\"" + service.listOfLists[parentIndex].listItems[index].name + "\" was marked as complete.");
+                $mdToast.showSimple("\"" + $filter("uppercaseFirstLetter")(service.listOfLists[parentIndex].listItems[index].name) + "\" was marked as complete.");
             }
         };
 
         service.unmarkComplete = function (index, bool, parentIndex) {
             if(bool){
                 service.listOfLists[parentIndex].listItems[index].completed = false;
-                $mdToast.showSimple("\"" + service.listOfLists[parentIndex].listItems[index].name + "\" was marked as incomplete.");
+                $mdToast.showSimple("\"" + $filter("uppercaseFirstLetter")(service.listOfLists[parentIndex].listItems[index].name) + "\" was marked as incomplete.");
             }
         };
 

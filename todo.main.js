@@ -3,7 +3,7 @@
  */
 
 (function() {
-    angular.module("todoApp", ["ui.router", "firebase", "ngMaterial", "ngStorage"])
+    angular.module("todoApp", ["ui.router", "firebase", "ngMaterial", "ngStorage", "ngAnimate"])
         .config(function($stateProvider, $urlRouterProvider) {
             //
             // For any unmatched url, redirect to /state1
