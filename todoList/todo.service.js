@@ -6,10 +6,15 @@
     angular.module("todoApp")
         .service("myService", listService);
 
-    function listService($mdToast) {
+    function listService($mdToast, $localStorage) {
         var service = this;
 
-        service.listOfLists = [];
+        if(!($localStorage.init)) {
+            $localStorage.listOfLists = [];
+            $localStorage.init = true;
+        }
+
+        service.listOfLists = $localStorage.listOfLists;
 
         service.addList = function (input) {
             service.listOfLists.push({"listName": input, "listItems": []});

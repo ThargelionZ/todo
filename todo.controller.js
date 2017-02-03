@@ -4,7 +4,7 @@
 
 (function () {
     angular.module("todoApp")
-        .controller("IndexController", function(authService) {
+        .controller("IndexController", function(authService, $localStorage) {
             var vm = this;
 
             vm.user = firebase.auth().currentUser;
