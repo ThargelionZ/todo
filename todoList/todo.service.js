@@ -23,8 +23,10 @@
 
         service.removeList = function (index) {
             var closeID = $("#closeList" + (index + 1));
+            var editID = $("#editListName" + (index + 1));
             service.listOfLists.splice(index, 1);
-            closeID.parent().remove();
+            $(closeID).remove();
+            $(editID).remove();
         };
 
         service.clearAllLists = function () {
@@ -44,8 +46,12 @@
 
         service.removeListItem = function (index, parentIndex) {
             var closeID = $("#close" + (index + 1));
+            var editID = $("#edit" + (index + 1));
+            var checkID = $("#check" + (index + 1));
             service.listOfLists[parentIndex].listItems.splice(index, 1);
-            closeID.parent().remove();
+            $(closeID).remove();
+            $(editID).remove();
+            $(checkID).remove();
         };
 
         service.clearAll = function (index) {
@@ -76,7 +82,7 @@
                 temp++;
                 if(service.listOfLists[index].listItems[i].completed == true){
                     service.listOfLists[index].listItems.splice(i, 1);
-                    $("#listItem" + (temp + 1)).remove();
+                    // $("#listItem" + (temp + 1)).remove();
                     i--;
                 }
 

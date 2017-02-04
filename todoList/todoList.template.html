@@ -5,7 +5,7 @@
     <h3 id="listsHeader">Lists</h3>
     <div id="listOfLists">
         <input type="text" id="listInput" ng-keyup="$ctrl.addList($event)" placeholder="Enter the Name of Your Lists">
-        <div id="list" ng-repeat="list in $ctrl.listOfLists">
+        <div id="list" ng-repeat="list in $ctrl.listOfLists" class="animate-repeat">
             <div id="listOfListsItem{{$index + 1}}" ng-class="{'selected': $index === $ctrl.selected}" class="listOfListsItem" ng-click="$ctrl.selected = $index">
                 <span class="listName" id="listName{{$index + 1}}">{{list.listName | uppercaseFirstLetter}}</span>
                 <span title="Close list item" id="closeList{{$index + 1}}" ng-click="$ctrl.removeList($index)" class="close glyphicon glyphicon-remove"></span>
@@ -29,12 +29,12 @@
     </div>
 
     <div class="todoLists" ng-repeat="list in $ctrl.listOfLists">
-        <div ng-if="$ctrl.isSelected($index)">
+        <div ng-if="$ctrl.isSelected($index)" class="animate-list">
             <h1 id="todoHeading">{{$ctrl.listOfLists[$index].listName | uppercaseFirstLetter}}</h1>
 
             <div id="todoBox">
                 <input type="text" id="todoInput" ng-keyup="$ctrl.addListItem($event, $index)" placeholder="Enter Your List of Tasks" maxlength="47">
-                <div id="lists" ng-repeat="list in $ctrl.listOfLists[$index].listItems">
+                <div id="lists" ng-repeat="list in $ctrl.listOfLists[$index].listItems" class="animate-repeat">
                     <div ng-class="{'completed-item': $ctrl.listOfLists[$parent.$index].listItems[$index].completed}" id="listItem{{$index + 1}}" class="listItem">
 
                         <span id="completed{{$index + 1}}" ng-class="{'no-display': !($ctrl.listOfLists[$parent.$index].listItems[$index].completed)}" class="completed glyphicon glyphicon-ok"></span>
@@ -51,7 +51,7 @@
                 <!--<div id="todoAmount">-->
                 <!--<span id="taskAmount">You have {{$ctrl.todoLists.length}} thing(s) to do.</span>-->
                 <!--</div>-->
-                <div ng-if="$ctrl.listOfLists[$index].listItems.length > 0" id="tabNav">
+                <div ng-if="$ctrl.listOfLists[$index].listItems.length > 0" id="tabNav" class="animate-repeat">
                     <span id="clearCompletedItems" ng-click="$ctrl.clearCompleted($index)">Clear Completed</span>
                     <span id="clearAll" ng-click="$ctrl.clearAll($index)">Clear All</span>
                 </div>
