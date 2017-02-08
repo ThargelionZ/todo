@@ -33,13 +33,14 @@
             <h1 id="todoHeading">{{$ctrl.listOfLists[$index].listName | uppercaseFirstLetter}}</h1>
 
             <div id="todoBox">
-                <input type="text" id="todoInput" ng-keyup="$ctrl.addListItem($event, $index)" placeholder="Enter Your List of Tasks" maxlength="47">
+                <input type="text" id="todoInput" ng-keyup="$ctrl.addListItem($event, $index)" placeholder="Enter Your List of Tasks">
                 <div id="lists" ng-repeat="list in $ctrl.listOfLists[$index].listItems" class="animate-repeat">
-                    <div ng-class="{'completed-item': $ctrl.listOfLists[$parent.$index].listItems[$index].completed}" id="listItem{{$index + 1}}" class="listItem">
+                    <div id="listItem{{$index + 1}}" class="listItem">
 
                         <span id="completed{{$index + 1}}" ng-class="{'no-display': !($ctrl.listOfLists[$parent.$index].listItems[$index].completed)}" class="completed glyphicon glyphicon-ok"></span>
 
-                        <span class="name" id="name{{$index + 1}}">{{list.name | uppercaseFirstLetter}}</span>
+                        <span ng-class="{'completed-item': $ctrl.listOfLists[$parent.$index].listItems[$index].completed}" class="name" id="name{{$index + 1}}">{{list.name | uppercaseFirstLetter}}</span>
+
 
                         <span title="Close list item" id="close{{$index + 1}}" ng-click="$ctrl.removeListItem($index, $parent.$index)" class="close glyphicon glyphicon-remove"></span>
                         <span title="Mark as complete or incomplete" ng-class="{'check-incomplete': $ctrl.listOfLists[$parent.$index].listItems[$index].completed, 'check-incomplete:hover': $ctrl.listOfLists[$parent.$index].listItems[$index].completed}" id="check{{$index + 1}}" ng-click="$ctrl.complete($index, $parent.$index)" class="check glyphicon glyphicon-ok"></span>

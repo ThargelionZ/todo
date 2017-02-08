@@ -54,7 +54,7 @@
             ctrl.editList = function (index) {
                 var data = myService.listOfLists[index].listName;
                 $("#listName" + (index + 1)).remove();
-                $("#listOfListsItem" + (index + 1)).prepend("<input id='editListName' value= '" + $filter("uppercaseFirstLetter")(data) + "' maxlength='47'>");
+                $("#listOfListsItem" + (index + 1)).prepend("<input id='editListName' value= '" + $filter("uppercaseFirstLetter")(data) + "'>");
                 $("#editListName").focus();
                 $("#editListName").select();
 
@@ -102,7 +102,7 @@
                 if(myService.listOfLists[parentIndex].listItems[index].completed == false){
                     var data = myService.listOfLists[parentIndex].listItems[index].name;
                     $("#name" + (index + 1)).remove();
-                    $("#listItem" + (index + 1)).prepend("<input id='editName' value= '" + $filter("uppercaseFirstLetter")(data) + "' maxlength='47'>");
+                    $("#listItem" + (index + 1)).prepend("<input id='editName' value= '" + $filter("uppercaseFirstLetter")(data) + "'>");
                     $("#editName").focus();
                     $("#editName").select();
 
